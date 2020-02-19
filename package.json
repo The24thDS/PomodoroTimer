@@ -1,0 +1,23 @@
+{
+  "name": "pomodoro-app",
+  "version": "1.0.0",
+  "description": "A simple Pomodoro timer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-packager . pomodoro-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=DS --version-string.FileDescription=PomodoroTimer --version-string.ProductName=\"Pomodoro Timer\"",
+    "create-installer-win": "node installers/windows/createinstaller.js"
+  },
+  "keywords": [
+    "pomodoro"
+  ],
+  "author": "David Sima",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^8.0.1"
+  },
+  "devDependencies": {
+    "electron-icon-maker": "0.0.4",
+    "electron-winstaller": "^4.0.0"
+  }
+}

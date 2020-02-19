@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pomodoro Timer</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div id="info">
+      <div id="session">Session 1</div>
+      <div id="time">
+        25:00
+      </div>
+    </div>
+    <div id="button">
+      <img id="img" src="play.svg" alt="play" />
+    </div>
+    <script>
+      const sessionDuration = 25;
+      const breakDuration = 5;
+      const img = document.getElementById("img");
+      const time = document.getElementById("time");
+      const session = document.getElementById("session");
+
+      let currentButton = "play";
+      let currentMinute = 25;
+      let currentSecond = 0;
+      let currentSession = 1;
+      let currentBreak = 0;
+      let isBreak = false;
+      let timer = null;
+
+      const formatNumber = number => (number < 10 ? `0${number}` : number);
+
+      const updateTimeText = () => {
+        time.innerText = `${formatNumber(currentMinute)}:${formatNumber(
+          currentSecond
+        )}`;
+      };
+
+      const updateSessionText = () => {
+        if (!isBreak) {
+          session.innerText = "Session " + currentSession;
+        } else {
+          session.innerText = "Break " + currentBreak;
+        }
+      };
+
+      const countDown = () => {
+        if (currentSecond === 0) {
+          if (currentMinute === 0) {
+            clearInterval(timer);
+            if (!isBreak) {
+              isBreak = true;
+              currentMinute = breakDuration;
+              currentSecond = 0;
+              currentBreak++;
+              startTimer();
+            } else {
+              isBreak = false;
+              currentMinute = sessionDuration;
+              currentSecond = 0;
+              currentSession++;
+              startTimer();
+            }
+          } else {
+            currentSecond = 59;
+            currentMinute--;
+          }
+        } else {
+          currentSecond--;
+        }
+      };
+
+      const startTimer = () => {
+        updateSessionText();
+        updateTimeText();
+        timer = setInterval(() => {
+          countDown();
+          updateTimeText();
+        }, 1000);
+      };
+
+      img.addEventListener("click", () => {
+        if (currentButton === "play") {
+          img.src = "pause.svg";
+          currentButton = "pause";
+          startTimer();
+        } else {
+          clearInterval(timer);
+          img.src = "play.svg";
+          currentButton = "play";
+        }
+      });
+
+      updateTimeText();
+      updateSessionText();
+    </script>
+  </body>
+</html>

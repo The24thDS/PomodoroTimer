@@ -1,0 +1,40 @@
+*
+  margin: 0
+  box-sizing: border-box
+  &:not(ul):not(ol)
+    padding: 0
+
+body
+  width: 100vw
+  height: 100vh
+  background-color: #BBE3E8
+  overflow: hidden
+  display: grid
+  grid-template-columns: 60% 30%
+  // justify-items: center
+  align-items: center
+  margin-left: 5%
+
+#info
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: flex-start
+  font-family: Arial, 'Times New Roman', Times, serif
+
+#time
+  font-size: 80px
+  font-weight: 500
+  color: #363636
+
+#button
+  width: 120px
+  height: 120px
+  background-color: #E8897E
+  border-radius: 50%
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15)
+  display: flex
+  justify-content: center
+  align-items: center
+  img
+    cursor: pointer
