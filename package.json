@@ -14,7 +14,7 @@
   "author": "David Sima",
   "license": "ISC",
   "dependencies": {
-    "electron": "^8.0.1"
+    "electron": "^8.5.2"
   },
   "devDependencies": {
     "electron-icon-maker": "0.0.4",
